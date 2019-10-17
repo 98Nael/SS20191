@@ -11,30 +11,34 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here
         $password = 'abc123';
-        echo md5($password) . '<br>';
-        echo sha1($password) . '<br>';
-        echo hash('md5',$password) . '<br>';
-        echo hash('sha1',$password) . '<br>';
-        echo hash('ripemd128',$password) . '<br>';
-        printf("%s\n",hash('ripemd128',$password));
-        printf("%s\n",hash('sha256',$password));
-        printf("%s\n",hash('sha512',$password));
+        // Experimenting hash
+        echo 'MD5:'.md5($password) . '<br>';
+        echo 'MD5:'.hash('md5',$password) . '<br>';
+        echo 'SHA-1:'.sha1($password) . '<br>'; 
+        echo 'SHA-1:'.hash('sha1',$password) . '<br>';
+        echo 'MD-128:'.hash('ripemd128',$password) . '<br>';
+        echo 'SHA-256:'.hash('sha256',$password) . '<br>';
+        echo 'SHA-512:'.hash('sha512',$password) . '<br>';        
         $b64 = base64_encode($password);
-        echo $b64 . '<br>';
-        echo base64_decode($b64) . '<br>';
+        echo 'B64:'.$b64 . '<br>';
+        echo 'Plain:'.base64_decode($b64) . '<br>';
         
         include_once 'Encryption.php';
         $encryption = new Encryption();
-       // $aesHash = $encryption->aesCrypt($password, 'e');
-        //echo $aesHash . '<br>';
-       // $aesPlain = $encryption->aesCrypt($aesHash, 'd');
-       // echo $aesPlain . '<br>';
-       $encryption->generateKey();
-        //$keys = $encryption->retrieveKey();
-        //echo $encryption->rsaCrypt('abc123', $keys['private'], $keys['public'], 1, 'e') . '<br>';
-        //echo 'AnyTest';
+        // Applying AES technique
+        $aesHash = $encryption->aesCrypt($password, 'e');
+        echo $aesHash . '<br>';
+        $aesPlain = $encryption->aesCrypt($aesHash, 'd');
+        echo $aesPlain . '<br>';
+        
+        // Applying RSA technique
+        $encryption->generateKey();
+        $keys = $encryption->retrieveKey();
+        $rsaCipher=$encryption->rsaCrypt('abc123', $keys['private'], $keys['public'], 1, 'e');
+        echo $rsaCipher. '<br>';
+        $rsaPlain=$encryption->rsaCrypt($rsaCipher, $keys['private'], $keys['public'], 1, 'd');
+        echo $rsaPlain. '<br>';
         ?>
     </body>
 </html>

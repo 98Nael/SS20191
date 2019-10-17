@@ -1,0 +1,5 @@
+Add the following to windows environmental variables
+This is needed to generate the keys of RSA using Openssl
+==========================================================
+Variable name: OPENSSL_CONF
+variable value: C:\AppServ\php7\extras\ssl\openssl.cnf
